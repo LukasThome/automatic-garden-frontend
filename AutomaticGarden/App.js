@@ -5,6 +5,7 @@ import SplashScreen from './SplashScreen.js';
 import HomeScreen from './Home.js'; 
 import ConfigurationsScreen from './Configurations.js'; 
 
+const Stack = createStackNavigator();
 
 
 const App = () => {
