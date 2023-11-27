@@ -1,22 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image, Button } from 'react-native';
-
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Button } from 'react-native';
 
 const ConfigurationsScreen = ({ navigation }) => {
-   
-    const navigateToConfigurations = () => {
-      navigation.navigate('Configurations');
-    };
-  
+  const [temperatura, setTemperatura] = useState('');
 
-return (
+  const navigateToConfigurations = () => {
+    navigation.navigate('Configurations');
+  };
+
+  const handleOKPress = () => {
+    // Lógica a ser executada quando o botão OK for pressionado
+    console.log('Temperatura:', temperatura);
+    // Adicione qualquer lógica adicional aqui
+  };
+
+  return (
     <View style={styles.container}>
-        
-        <View style={styles.container}>
-        {/* Button to go to configs */}
-        <Button title="Configurations" onPress={navigateToConfigurations} />
+      {/* Botão para navegar para as configurações */}
+      <Button title="Configurations" onPress={navigateToConfigurations} />
+
+      {/* Campo de input para temperatura */}
+      <View style={styles.inputContainer}>
+        <Text>Temperatura:</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Digite a temperatura"
+          keyboardType="numeric"
+          value={temperatura}
+          onChangeText={(text) => setTemperatura(text)}
+        />
       </View>
 
+      {/* Botão OK */}
+      <TouchableOpacity style={styles.okButton} onPress={handleOKPress}>
+        <Text style={styles.okButtonText}>OK</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -26,20 +44,27 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
   },
-  
-  logo: {
-    width: 50,
-    height: 50,
-    marginRight: 10,
+  inputContainer: {
+    marginTop: 20,
   },
-  name: {
-    fontSize: 16,
-    fontWeight: 'bold',
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    paddingLeft: 10,
+    marginTop: 5,
   },
-  favoriteButtonText: {
+  okButton: {
+    backgroundColor: 'blue',
+    padding: 10,
+    marginTop: 10,
+    alignItems: 'center',
+  },
+  okButtonText: {
     color: 'white',
-    fontSize: 12,
+    fontSize: 16,
   },
 });
 
 export default ConfigurationsScreen;
+  
