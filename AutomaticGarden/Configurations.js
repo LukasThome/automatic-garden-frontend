@@ -1,17 +1,29 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Button } from 'react-native';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Button,
+} from "react-native";
+import axios from "axios";
 
 const ConfigurationsScreen = ({ navigation }) => {
-  const [temperatura, setTemperatura] = useState('');
+  const [temperatura, setTemperatura] = useState("");
 
   const navigateToConfigurations = () => {
-    navigation.navigate('Configurations');
+    navigation.navigate("Configurations");
   };
 
   const handleOKPress = () => {
     // Lógica a ser executada quando o botão OK for pressionado
-    console.log('Temperatura:', temperatura);
+    console.log("Temperatura:", temperatura);
     // Adicione qualquer lógica adicional aqui
+    // escreva o código para enviar a temperatura para o Arduino
+    axios.patch("http://localhost:8000/Config/atualizar-temperatura", {
+      temperatura: temperatura,
+    });
   };
 
   return (
@@ -49,22 +61,21 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    borderColor: 'gray',
+    borderColor: "gray",
     borderWidth: 1,
     paddingLeft: 10,
     marginTop: 5,
   },
   okButton: {
-    backgroundColor: 'blue',
+    backgroundColor: "blue",
     padding: 10,
     marginTop: 10,
-    alignItems: 'center',
+    alignItems: "center",
   },
   okButtonText: {
-    color: 'white',
+    color: "white",
     fontSize: 16,
   },
 });
 
 export default ConfigurationsScreen;
-  
