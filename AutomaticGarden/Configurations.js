@@ -10,7 +10,7 @@ import {
 import axios from "axios";
 
 const ConfigurationsScreen = ({ navigation }) => {
-  const [temperatura, setTemperatura] = useState("");
+  const [umidade, setUmidade] = useState("");
 
   const navigateToConfigurations = () => {
     navigation.navigate("Configurations");
@@ -18,11 +18,11 @@ const ConfigurationsScreen = ({ navigation }) => {
 
   const handleOKPress = () => {
     // Lógica a ser executada quando o botão OK for pressionado
-    console.log("Temperatura:", temperatura);
+    console.log("Umidade:", umidade);
     // Adicione qualquer lógica adicional aqui
-    // escreva o código para enviar a temperatura para o Arduino
-    axios.patch("http://localhost:8000/Config/atualizar-temperatura", {
-      temperatura: temperatura,
+    // escreva o código para enviar a umidade para o Arduino
+    axios.patch("http://localhost:8000/Config/atualizar-umidade", {
+      umidade: umidade,
     });
   };
 
@@ -31,15 +31,15 @@ const ConfigurationsScreen = ({ navigation }) => {
       {/* Botão para navegar para as configurações */}
       <Button title="Configurations" onPress={navigateToConfigurations} />
 
-      {/* Campo de input para temperatura */}
+      {/* Campo de input para umidade */}
       <View style={styles.inputContainer}>
-        <Text>Temperatura:</Text>
+        <Text>Umidade:</Text>
         <TextInput
           style={styles.input}
-          placeholder="Digite a temperatura"
+          placeholder="Digite a umidade"
           keyboardType="numeric"
-          value={temperatura}
-          onChangeText={(text) => setTemperatura(text)}
+          value={umidade}
+          onChangeText={(text) => setUmidade(text)}
         />
       </View>
 
