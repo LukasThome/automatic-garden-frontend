@@ -17,12 +17,21 @@ const ConfigurationsScreen = ({ navigation }) => {
   };
 
   const handleOKPress = () => {
-    // Lógica a ser executada quando o botão OK for pressionado
-    console.log("Umidade:", umidade);
-    // Adicione qualquer lógica adicional aqui
-    // escreva o código para enviar a umidade para o Arduino
+    // Check if umidade is a number and is not empty
+    if (isNaN(umidade) || umidade === "") {
+      setMessageStatus("Please enter a valid number");
+      return;
+    }
+  
     axios.patch("http://localhost:8000/Config/atualizar-umidade", {
       umidade: umidade,
+    })
+    .then(() => {
+      setMessageStatus("Value sent successfully");
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      setMessageStatus("Failed to send value");
     });
   };
 
